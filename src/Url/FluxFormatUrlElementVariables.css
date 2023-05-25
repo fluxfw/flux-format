@@ -1,0 +1,5 @@
+:root {
+    --flux-format-url-background-color: var(--flux-color-scheme-background, #ffffff);
+    --flux-format-url-font-size: 16px;
+    --flux-format-url-foreground-color: var(--flux-color-scheme-accent, #000000);
+}

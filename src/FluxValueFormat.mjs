@@ -1,15 +1,15 @@
-import { FORMAT_TYPE_COLOR, FORMAT_TYPE_EMAIL, FORMAT_TYPE_TEXT, FORMAT_TYPE_URL } from "./FORMAT_TYPE.mjs";
+import { VALUE_FORMAT_TYPE_COLOR, VALUE_FORMAT_TYPE_EMAIL, VALUE_FORMAT_TYPE_TEXT, VALUE_FORMAT_TYPE_URL } from "./VALUE_FORMAT_TYPE.mjs";
 
 /** @typedef {import("./formatValue.mjs").formatValue} formatValue */
 
-export class FluxFormat {
+export class FluxValueFormat {
     /**
      * @type {Map<string, formatValue>}
      */
     #formats;
 
     /**
-     * @returns {FluxFormat}
+     * @returns {FluxValueFormat}
      */
     static new() {
         return new this();
@@ -37,44 +37,65 @@ export class FluxFormat {
      * @returns {Promise<string | Node>}
      */
     async formatValue(value = null, type = null) {
-        switch (type ?? FORMAT_TYPE_TEXT) {
-            case FORMAT_TYPE_COLOR:
+        switch (type ?? VALUE_FORMAT_TYPE_TEXT) {
+            case VALUE_FORMAT_TYPE_COLOR:
                 if ((value ?? "") !== "") {
-                    return (await import("./Color/FluxFormatColorElement.mjs")).FluxFormatColorElement.new(
+                    return (await import("./Color/FluxValueFormatColorElement.mjs")).FluxValueFormatColorElement.new(
                         value
                     );
                 } else {
                     return this.formatValue(
                         value,
-                        FORMAT_TYPE_TEXT
+                        VALUE_FORMAT_TYPE_TEXT
                     );
                 }
 
-            case FORMAT_TYPE_EMAIL:
-                if ((value ?? "") !== "") {
-                    return (await import("./Url/FluxFormatUrlElement.mjs")).FluxFormatUrlElement.new(
-                        `mailto:${value}`,
-                        value
+            case VALUE_FORMAT_TYPE_EMAIL:
+                if (value === null || typeof value !== "object") {
+                    return this.formatValue(
+                        {
+                            email: value
+                        },
+                        VALUE_FORMAT_TYPE_EMAIL
+                    );
+                }
+
+                if ((value.email ?? "") !== "") {
+                    return (await import("./Url/FluxValueFormatUrlElement.mjs")).FluxValueFormatUrlElement.new(
+                        `mailto:${value.email}`,
+                        (value.label ?? "") !== "" ? value.label : value.email,
+                        value.title ?? null
                     );
                 } else {
                     return this.formatValue(
-                        value,
-                        FORMAT_TYPE_TEXT
+                        value.email,
+                        VALUE_FORMAT_TYPE_TEXT
                     );
                 }
 
-            case FORMAT_TYPE_TEXT:
+            case VALUE_FORMAT_TYPE_TEXT:
                 return `${(value ?? "") !== "" ? value : "-"}`;
 
-            case FORMAT_TYPE_URL:
-                if ((value ?? "") !== "") {
-                    return (await import("./Url/FluxFormatUrlElement.mjs")).FluxFormatUrlElement.new(
-                        value
+            case VALUE_FORMAT_TYPE_URL:
+                if (value === null || typeof value !== "object") {
+                    return this.formatValue(
+                        {
+                            url: value
+                        },
+                        VALUE_FORMAT_TYPE_URL
+                    );
+                }
+
+                if ((value.url ?? "") !== "") {
+                    return (await import("./Url/FluxValueFormatUrlElement.mjs")).FluxValueFormatUrlElement.new(
+                        value.url,
+                        value.label ?? null,
+                        value.title ?? null
                     );
                 } else {
                     return this.formatValue(
-                        value,
-                        FORMAT_TYPE_TEXT
+                        value.url,
+                        VALUE_FORMAT_TYPE_TEXT
                     );
                 }
 

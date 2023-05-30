@@ -1,21 +1,19 @@
 import { flux_css_api } from "../../../flux-css-api/src/FluxCssApi.mjs";
 
-flux_css_api.adopt(
-    document,
-    await flux_css_api.import(
-        `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorElementVariables.css`
-    ),
-    true
+const variables_css = await flux_css_api.import(
+    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxValueFormatColorElementVariables.css`
 );
+
+document.adoptedStyleSheets.unshift(variables_css);
 
 const css = await flux_css_api.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorElement.css`
+    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxValueFormatColorElement.css`
 );
 
-export class FluxFormatColorElement extends HTMLElement {
+export class FluxValueFormatColorElement extends HTMLElement {
     /**
      * @param {string} color
-     * @returns {FluxFormatColorElement}
+     * @returns {FluxValueFormatColorElement}
      */
     static new(color) {
         return new this(
@@ -34,14 +32,11 @@ export class FluxFormatColorElement extends HTMLElement {
             mode: "closed"
         });
 
-        flux_css_api.adopt(
-            shadow,
-            css
-        );
+        shadow.adoptedStyleSheets.push(css);
 
         const color_element = document.createElement("div");
         color_element.classList.add("color");
-        color_element.style.setProperty("--flux-format-color-color", color);
+        color_element.style.setProperty("--flux-value-format-color-color", color);
         shadow.appendChild(color_element);
 
         const text_element = document.createElement("div");
@@ -51,6 +46,6 @@ export class FluxFormatColorElement extends HTMLElement {
     }
 }
 
-export const FLUX_FORMAT_COLOR_ELEMENT_TAG_NAME = "flux-format-color";
+export const FLUX_VALUE_FORMAT_COLOR_ELEMENT_TAG_NAME = "flux-value-format-color";
 
-customElements.define(FLUX_FORMAT_COLOR_ELEMENT_TAG_NAME, FluxFormatColorElement);
+customElements.define(FLUX_VALUE_FORMAT_COLOR_ELEMENT_TAG_NAME, FluxValueFormatColorElement);

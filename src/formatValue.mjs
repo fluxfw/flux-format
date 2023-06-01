@@ -1,3 +1,3 @@
 /**
- * @typedef {(value: *) => Promise<string | Node>} formatValue
+ * @typedef {(value?: *) => Promise<*>} formatValue
  */

@@ -1,19 +1,19 @@
 import { flux_css_api } from "../../../flux-css-api/src/FluxCssApi.mjs";
 
 const variables_css = await flux_css_api.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxValueFormatColorElementVariables.css`
+    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElementVariables.css`
 );
 
 document.adoptedStyleSheets.unshift(variables_css);
 
 const css = await flux_css_api.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxValueFormatColorElement.css`
+    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElement.css`
 );
 
-export class FluxValueFormatColorElement extends HTMLElement {
+export class FluxFormatColorValueElement extends HTMLElement {
     /**
      * @param {string} color
-     * @returns {FluxValueFormatColorElement}
+     * @returns {FluxFormatColorValueElement}
      */
     static new(color) {
         return new this(
@@ -36,7 +36,7 @@ export class FluxValueFormatColorElement extends HTMLElement {
 
         const color_element = document.createElement("div");
         color_element.classList.add("color");
-        color_element.style.setProperty("--flux-value-format-color-color", color);
+        color_element.style.setProperty("--flux-format-color-value-color", color);
         shadow.appendChild(color_element);
 
         const text_element = document.createElement("div");
@@ -46,6 +46,6 @@ export class FluxValueFormatColorElement extends HTMLElement {
     }
 }
 
-export const FLUX_VALUE_FORMAT_COLOR_ELEMENT_TAG_NAME = "flux-value-format-color";
+export const FLUX_FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME = "flux-format-color-value";
 
-customElements.define(FLUX_VALUE_FORMAT_COLOR_ELEMENT_TAG_NAME, FluxValueFormatColorElement);
+customElements.define(FLUX_FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME, FluxFormatColorValueElement);

@@ -1,0 +1,7 @@
+:root {
+    --flux-format-color-value-background-color: var(--flux-color-scheme-background, #ffffff);
+    --flux-format-color-value-font-size: 16px;
+    --flux-format-color-value-foreground-color: var(--flux-color-scheme-foreground, #000000);
+    --flux-format-color-value-gap: 5px;
+    --flux-format-color-value-size: 20px;
+}

@@ -1,0 +1,26 @@
+:host {
+    align-items: center;
+    background-color: var(--flux-format-color-value-background-color);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--flux-format-color-value-gap);
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+}
+
+.color {
+    background-color: var(--flux-format-color-value-color);
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: var(--flux-format-color-value-size);
+    width: var(--flux-format-color-value-size);
+}
+
+.text {
+    color: var(--flux-format-color-value-foreground-color);
+    font-size: var(--flux-format-color-value-font-size);
+    flex-grow: 0;
+    flex-shrink: 0;
+}

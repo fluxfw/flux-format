@@ -19,7 +19,7 @@ a:link {
     text-decoration: underline;
 }
 
-a:link:focus-visible {
+a:focus-visible {
     outline: 2px solid var(--flux-format-url-value-outline-color);
     outline-offset: 0;
 }

@@ -10,9 +10,15 @@ a {
     color: var(--flux-format-url-value-foreground-color);
     cursor: default;
     font-size: var(--flux-format-url-value-font-size);
+    outline: none;
     text-decoration: underline;
 }
 
 a:link {
     cursor: pointer;
+}
+
+a:link:focus-visible {
+    outline: 2px solid var(--flux-format-url-value-outline-color);
+    outline-offset: -2px;
 }

@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2023-06-02-1
+
+Changes:
+
+- Remove `formatValueType`
+
 ## v2023-06-01-1
 
 Changes:

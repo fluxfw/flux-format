@@ -1,21 +1,45 @@
-import { flux_css_api } from "../../../flux-css-api/src/FluxCssApi.mjs";
+import { flux_import_css } from "../../../flux-style-sheet-manager/src/FluxImportCss.mjs";
 
-const root_css = await flux_css_api.import(
+/** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
+
+const root_css = await flux_import_css.import(
     `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElementRoot.css`
 );
 
-document.adoptedStyleSheets.unshift(root_css);
-
-const css = await flux_css_api.import(
+const css = await flux_import_css.import(
     `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElement.css`
 );
+
+export const FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-color-value-";
 
 export class FluxFormatColorValueElement extends HTMLElement {
     /**
      * @param {string} color
-     * @returns {FluxFormatColorValueElement}
+     * @param {StyleSheetManager | null} style_sheet_manager
+     * @returns {Promise<FluxFormatColorValueElement>}
      */
-    static new(color) {
+    static async new(color, style_sheet_manager = null) {
+        if (style_sheet_manager !== null) {
+            await style_sheet_manager.generateVariableStyleSheet(
+                this.name,
+                {
+                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
+                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`]: "foreground-color",
+                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "foreground-color"
+                },
+                true
+            );
+
+            await style_sheet_manager.addStyleSheet(
+                root_css,
+                true
+            );
+        } else {
+            if (!document.adoptedStyleSheets.includes(root_css)) {
+                document.adoptedStyleSheets.unshift(root_css);
+            }
+        }
+
         return new this(
             color
         );
@@ -36,7 +60,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
 
         const color_element = document.createElement("div");
         color_element.classList.add("color");
-        color_element.style.setProperty("--flux-format-color-value-color", color);
+        color_element.style.setProperty(`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`, color);
         shadow.append(color_element);
 
         const text_element = document.createElement("div");

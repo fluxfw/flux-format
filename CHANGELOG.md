@@ -6,11 +6,17 @@ Changes:
 
 \-
 
+## v2023-07-27-1
+
+Changes:
+
+- Style sheet manager
+
 ## v2023-07-10-1
 
 Changes:
 
-\-
+- `flux-color-scheme`
 
 ## v2023-06-08-1
 

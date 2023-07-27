@@ -1,43 +1,55 @@
 import { DEFAULT_FORMAT_VALUE_TYPES } from "./DEFAULT_FORMAT_VALUE_TYPES.mjs";
 
 /** @typedef {import("./formatValue.mjs").formatValue} formatValue */
+/** @typedef {import("./StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
 
 export class FluxValueFormat {
     /**
      * @type {Map<string, formatValue>}
      */
     #format_values;
+    /**
+     * @type {StyleSheetManager | null}
+     */
+    #style_sheet_manager;
 
     /**
-     * @returns {FluxValueFormat}
+     * @param {StyleSheetManager | null} style_sheet_manager
+     * @returns {Promise<FluxValueFormat>}
      */
-    static new() {
-        return new this();
-    }
-
-    /**
-     * @private
-     */
-    constructor() {
-        this.#format_values = new Map();
+    static async new(style_sheet_manager = null) {
+        const flux_value_format = new this(
+            style_sheet_manager
+        );
 
         for (const [
             type,
             format_value
         ] of Object.entries(DEFAULT_FORMAT_VALUE_TYPES)) {
-            this.addFormatValue(
+            await flux_value_format.addFormatValue(
                 type,
                 format_value
             );
         }
+
+        return flux_value_format;
+    }
+
+    /**
+     * @param {StyleSheetManager | null} style_sheet_manager
+     * @private
+     */
+    constructor(style_sheet_manager) {
+        this.#style_sheet_manager = style_sheet_manager;
+        this.#format_values = new Map();
     }
 
     /**
      * @param {string} type
      * @param {formatValue} format_value
-     * @returns {void}
+     * @returns {Promise<void>}
      */
-    addFormatValue(type, format_value) {
+    async addFormatValue(type, format_value) {
         if (this.#format_values.has(type)) {
             throw new Error(`Format value type ${type} already exists`);
         }
@@ -61,7 +73,8 @@ export class FluxValueFormat {
             }
 
             formatted_value = await format_value(
-                value
+                value,
+                this.#style_sheet_manager
             ) ?? null;
 
         } else {

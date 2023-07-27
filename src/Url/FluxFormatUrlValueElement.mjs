@@ -1,23 +1,47 @@
-import { flux_css_api } from "../../../flux-css-api/src/FluxCssApi.mjs";
+import { flux_import_css } from "../../../flux-style-sheet-manager/src/FluxImportCss.mjs";
 
-const root_css = await flux_css_api.import(
+/** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
+
+const root_css = await flux_import_css.import(
     `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatUrlValueElementRoot.css`
 );
 
-document.adoptedStyleSheets.unshift(root_css);
-
-const css = await flux_css_api.import(
+const css = await flux_import_css.import(
     `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatUrlValueElement.css`
 );
+
+export const FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-url-value-";
 
 export class FluxFormatUrlValueElement extends HTMLElement {
     /**
      * @param {string} url
      * @param {string | null} label
      * @param {string | null} title
-     * @returns {FluxFormatUrlValueElement}
+     * @param {StyleSheetManager | null} style_sheet_manager
+     * @returns {Promise<FluxFormatUrlValueElement>}
      */
-    static new(url, label = null, title = null) {
+    static async new(url, label = null, title = null, style_sheet_manager = null) {
+        if (style_sheet_manager !== null) {
+            await style_sheet_manager.generateVariableStyleSheet(
+                this.name,
+                {
+                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
+                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "accent-color",
+                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}outline-color`]: "foreground-color"
+                },
+                true
+            );
+
+            await style_sheet_manager.addStyleSheet(
+                root_css,
+                true
+            );
+        } else {
+            if (!document.adoptedStyleSheets.includes(root_css)) {
+                document.adoptedStyleSheets.unshift(root_css);
+            }
+        }
+
         return new this(
             url,
             label,

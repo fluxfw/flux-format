@@ -24,7 +24,14 @@ a:focus-visible {
     outline-offset: 0;
 }
 
-a:link:is(:hover, :active) {
+a:link:active {
     color: var(--flux-format-url-value-active-foreground-color);
     text-decoration: var(--flux-format-url-value-active-text-decoration);
+}
+
+@media (hover: hover) {
+    a:link:hover {
+        color: var(--flux-format-url-value-active-foreground-color);
+        text-decoration: var(--flux-format-url-value-active-text-decoration);
+    }
 }

@@ -35,7 +35,7 @@ export async function valueToDate(value = null, string_value_is_local_time_zone 
     }
 
     if (typeof value === "number") {
-        return new Date(value * 1000);
+        return new Date(value * 1_000);
     }
 
     if (typeof value === "string" && TIMESTAMP_PATTERN.test(value)) {
@@ -72,7 +72,7 @@ export async function valueToTimestamp(value = null, string_value_is_local_time_
     }
 
     if (value instanceof Date) {
-        return value.getTime() / 1000;
+        return value.getTime() / 1_000;
     }
 
     if (typeof value === "number") {

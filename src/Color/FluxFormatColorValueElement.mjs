@@ -20,7 +20,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
      */
     static async new(color, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
-            await style_sheet_manager.generateVariableStyleSheet(
+            await style_sheet_manager.generateVariablesRootStyleSheet(
                 this.name,
                 {
                     [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
@@ -30,7 +30,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
                 true
             );
 
-            await style_sheet_manager.addStyleSheet(
+            await style_sheet_manager.addRootStyleSheet(
                 root_css,
                 true
             );
@@ -40,21 +40,15 @@ export class FluxFormatColorValueElement extends HTMLElement {
             }
         }
 
-        return new this(
-            color
-        );
-    }
+        const flux_format_color_value_element = new this();
 
-    /**
-     * @param {string} color
-     * @private
-     */
-    constructor(color) {
-        super();
-
-        const shadow = this.attachShadow({
+        const shadow = flux_format_color_value_element.attachShadow({
             mode: "closed"
         });
+
+        await style_sheet_manager?.addStyleSheetsToShadow(
+            shadow
+        );
 
         shadow.adoptedStyleSheets.push(css);
 
@@ -67,6 +61,15 @@ export class FluxFormatColorValueElement extends HTMLElement {
         text_element.classList.add("text");
         text_element.innerText = color;
         shadow.append(text_element);
+
+        return flux_format_color_value_element;
+    }
+
+    /**
+     * @private
+     */
+    constructor() {
+        super();
     }
 }
 

@@ -22,7 +22,7 @@ export class FluxFormatUrlValueElement extends HTMLElement {
      */
     static async new(url, label = null, title = null, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
-            await style_sheet_manager.generateVariableStyleSheet(
+            await style_sheet_manager.generateVariablesRootStyleSheet(
                 this.name,
                 {
                     [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
@@ -32,7 +32,7 @@ export class FluxFormatUrlValueElement extends HTMLElement {
                 true
             );
 
-            await style_sheet_manager.addStyleSheet(
+            await style_sheet_manager.addRootStyleSheet(
                 root_css,
                 true
             );
@@ -42,25 +42,15 @@ export class FluxFormatUrlValueElement extends HTMLElement {
             }
         }
 
-        return new this(
-            url,
-            label,
-            title
-        );
-    }
+        const flux_format_url_value_element = new this();
 
-    /**
-     * @param {string} url
-     * @param {string | null} label
-     * @param {string | null} title
-     * @private
-     */
-    constructor(url, label, title) {
-        super();
-
-        const shadow = this.attachShadow({
+        const shadow = flux_format_url_value_element.attachShadow({
             mode: "closed"
         });
+
+        await style_sheet_manager?.addStyleSheetsToShadow(
+            shadow
+        );
 
         shadow.adoptedStyleSheets.push(css);
 
@@ -73,6 +63,15 @@ export class FluxFormatUrlValueElement extends HTMLElement {
             link_element.title = title;
         }
         shadow.append(link_element);
+
+        return flux_format_url_value_element;
+    }
+
+    /**
+     * @private
+     */
+    constructor() {
+        super();
     }
 }
 

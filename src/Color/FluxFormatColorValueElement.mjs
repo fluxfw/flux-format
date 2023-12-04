@@ -21,7 +21,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
     static async new(color, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
             await style_sheet_manager.generateVariablesRootStyleSheet(
-                this.name,
+                FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX,
                 {
                     [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
                     [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`]: "foreground-color",

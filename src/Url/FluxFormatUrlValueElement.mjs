@@ -23,7 +23,7 @@ export class FluxFormatUrlValueElement extends HTMLElement {
     static async new(url, label = null, title = null, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
             await style_sheet_manager.generateVariablesRootStyleSheet(
-                this.name,
+                FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX,
                 {
                     [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
                     [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "accent-color",

@@ -1,14 +1,7 @@
-import { flux_import_css } from "../../../flux-style-sheet-manager/src/FluxImportCss.mjs";
+import css from "./FluxFormatUrlValueElement.css" with { type: "css" };
+import root_css from "./FluxFormatUrlValueElementRoot.css" with { type: "css" };
 
 /** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
-
-const root_css = await flux_import_css.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatUrlValueElementRoot.css`
-);
-
-const css = await flux_import_css.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatUrlValueElement.css`
-);
 
 export const FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-url-value-";
 

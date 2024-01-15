@@ -1,14 +1,7 @@
-import { flux_import_css } from "../../../flux-style-sheet-manager/src/FluxImportCss.mjs";
+import css from "./FluxFormatColorValueElement.css" with { type: "css" };
+import root_css from "./FluxFormatColorValueElementRoot.css" with { type: "css" };
 
 /** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
-
-const root_css = await flux_import_css.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElementRoot.css`
-);
-
-const css = await flux_import_css.import(
-    `${import.meta.url.substring(0, import.meta.url.lastIndexOf("/"))}/FluxFormatColorValueElement.css`
-);
 
 export const FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-color-value-";
 

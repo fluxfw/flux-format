@@ -51,7 +51,7 @@ export class FluxValueFormat {
      */
     async addFormatValue(type, format_value) {
         if (this.#format_values.has(type)) {
-            throw new Error(`Format value type ${type} already exists`);
+            throw new Error(`Format value type ${type} already exists!`);
         }
 
         this.#format_values.set(type, format_value);
@@ -69,7 +69,7 @@ export class FluxValueFormat {
             const format_value = this.#format_values.get(type) ?? null;
 
             if (format_value === null) {
-                throw new Error(`Unknown format value type ${type}`);
+                throw new Error(`Unknown format value type ${type}!`);
             }
 
             formatted_value = await format_value(

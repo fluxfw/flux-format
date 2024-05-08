@@ -1,3 +1,1 @@
-# flux-format-value
-
-Format value
+# format-value

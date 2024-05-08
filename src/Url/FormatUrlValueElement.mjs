@@ -1,26 +1,26 @@
-import css from "./FluxFormatUrlValueElement.css" with { type: "css" };
-import root_css from "./FluxFormatUrlValueElementRoot.css" with { type: "css" };
+import css from "./FormatUrlValueElement.css" with { type: "css" };
+import root_css from "./FormatUrlValueElementRoot.css" with { type: "css" };
 
 /** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
 
-export const FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-url-value-";
+export const FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX = "--format-url-value-";
 
-export class FluxFormatUrlValueElement extends HTMLElement {
+export class FormatUrlValueElement extends HTMLElement {
     /**
      * @param {string} url
      * @param {string | null} label
      * @param {string | null} title
      * @param {StyleSheetManager | null} style_sheet_manager
-     * @returns {Promise<FluxFormatUrlValueElement>}
+     * @returns {Promise<FormatUrlValueElement>}
      */
     static async new(url, label = null, title = null, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
             await style_sheet_manager.generateVariablesRootStyleSheet(
-                FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX,
+                FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX,
                 {
-                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
-                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "accent-color",
-                    [`${FLUX_FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}outline-color`]: "foreground-color"
+                    [`${FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
+                    [`${FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "accent-color",
+                    [`${FORMAT_URL_VALUE_ELEMENT_VARIABLE_PREFIX}outline-color`]: "foreground-color"
                 },
                 true
             );
@@ -35,9 +35,9 @@ export class FluxFormatUrlValueElement extends HTMLElement {
             }
         }
 
-        const flux_format_url_value_element = new this();
+        const format_url_value_element = new this();
 
-        const shadow = flux_format_url_value_element.attachShadow({
+        const shadow = format_url_value_element.attachShadow({
             mode: "closed"
         });
 
@@ -57,7 +57,7 @@ export class FluxFormatUrlValueElement extends HTMLElement {
         }
         shadow.append(link_element);
 
-        return flux_format_url_value_element;
+        return format_url_value_element;
     }
 
     /**
@@ -68,6 +68,6 @@ export class FluxFormatUrlValueElement extends HTMLElement {
     }
 }
 
-export const FLUX_FORMAT_URL_VALUE_ELEMENT_TAG_NAME = "flux-format-url-value";
+export const FORMAT_URL_VALUE_ELEMENT_TAG_NAME = "format-url-value";
 
-customElements.define(FLUX_FORMAT_URL_VALUE_ELEMENT_TAG_NAME, FluxFormatUrlValueElement);
+customElements.define(FORMAT_URL_VALUE_ELEMENT_TAG_NAME, FormatUrlValueElement);

@@ -1,0 +1,26 @@
+:host {
+    align-items: center;
+    background-color: var(--format-color-value-background-color);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--format-color-value-gap);
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+}
+
+.color {
+    background-color: var(--format-color-value-color);
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: var(--format-color-value-size);
+    width: var(--format-color-value-size);
+}
+
+.text {
+    color: var(--format-color-value-foreground-color);
+    font-size: var(--format-color-value-font-size);
+    flex-grow: 0;
+    flex-shrink: 0;
+}

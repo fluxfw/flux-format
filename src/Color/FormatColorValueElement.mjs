@@ -1,24 +1,24 @@
-import css from "./FluxFormatColorValueElement.css" with { type: "css" };
-import root_css from "./FluxFormatColorValueElementRoot.css" with { type: "css" };
+import css from "./FormatColorValueElement.css" with { type: "css" };
+import root_css from "./FormatColorValueElementRoot.css" with { type: "css" };
 
 /** @typedef {import("../StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
 
-export const FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX = "--flux-format-color-value-";
+export const FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX = "--format-color-value-";
 
-export class FluxFormatColorValueElement extends HTMLElement {
+export class FormatColorValueElement extends HTMLElement {
     /**
      * @param {string} color
      * @param {StyleSheetManager | null} style_sheet_manager
-     * @returns {Promise<FluxFormatColorValueElement>}
+     * @returns {Promise<FormatColorValueElement>}
      */
     static async new(color, style_sheet_manager = null) {
         if (style_sheet_manager !== null) {
             await style_sheet_manager.generateVariablesRootStyleSheet(
-                FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX,
+                FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX,
                 {
-                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
-                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`]: "foreground-color",
-                    [`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "foreground-color"
+                    [`${FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}background-color`]: "background-color",
+                    [`${FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`]: "foreground-color",
+                    [`${FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}foreground-color`]: "foreground-color"
                 },
                 true
             );
@@ -33,9 +33,9 @@ export class FluxFormatColorValueElement extends HTMLElement {
             }
         }
 
-        const flux_format_color_value_element = new this();
+        const format_color_value_element = new this();
 
-        const shadow = flux_format_color_value_element.attachShadow({
+        const shadow = format_color_value_element.attachShadow({
             mode: "closed"
         });
 
@@ -47,7 +47,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
 
         const color_element = document.createElement("div");
         color_element.classList.add("color");
-        color_element.style.setProperty(`${FLUX_FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`, color);
+        color_element.style.setProperty(`${FORMAT_COLOR_VALUE_ELEMENT_VARIABLE_PREFIX}color`, color);
         shadow.append(color_element);
 
         const text_element = document.createElement("div");
@@ -55,7 +55,7 @@ export class FluxFormatColorValueElement extends HTMLElement {
         text_element.innerText = color;
         shadow.append(text_element);
 
-        return flux_format_color_value_element;
+        return format_color_value_element;
     }
 
     /**
@@ -66,6 +66,6 @@ export class FluxFormatColorValueElement extends HTMLElement {
     }
 }
 
-export const FLUX_FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME = "flux-format-color-value";
+export const FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME = "format-color-value";
 
-customElements.define(FLUX_FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME, FluxFormatColorValueElement);
+customElements.define(FORMAT_COLOR_VALUE_ELEMENT_TAG_NAME, FormatColorValueElement);

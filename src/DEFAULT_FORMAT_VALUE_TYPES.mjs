@@ -3,8 +3,8 @@ import { FORMAT_VALUE_TYPE_COLOR, FORMAT_VALUE_TYPE_DATE, FORMAT_VALUE_TYPE_DATE
 /** @typedef {import("./DateTime/DateTimeValue.mjs").DateTimeValue} DateTimeValue */
 /** @typedef {import("./Date/DateValue.mjs").DateValue} DateValue */
 /** @typedef {import("./Email/EmailValue.mjs").EmailValue} EmailValue */
-/** @typedef {import("./Color/FluxFormatColorValueElement.mjs").FluxFormatColorValueElement} FluxFormatColorValueElement */
-/** @typedef {import("./Url/FluxFormatUrlValueElement.mjs").FluxFormatUrlValueElement} FluxFormatUrlValueElement */
+/** @typedef {import("./Color/FormatColorValueElement.mjs").FormatColorValueElement} FormatColorValueElement */
+/** @typedef {import("./Url/FormatUrlValueElement.mjs").FormatUrlValueElement} FormatUrlValueElement */
 /** @typedef {import("./formatValue.mjs").formatValue} formatValue */
 /** @typedef {import("./StyleSheetManager/StyleSheetManager.mjs").StyleSheetManager} StyleSheetManager */
 /** @typedef {import("./Time/TimeValue.mjs").TimeValue} TimeValue */
@@ -105,14 +105,14 @@ export async function valueToTimestamp(value = null, string_value_is_local_time_
 /**
  * @param {string | null} color
  * @param {StyleSheetManager | null} style_sheet_manager
- * @returns {Promise<FluxFormatColorValueElement | string | null>}
+ * @returns {Promise<FormatColorValueElement | string | null>}
  */
 export async function formatColorValue(color = null, style_sheet_manager = null) {
     if ((color ?? "") === "") {
         return color;
     }
 
-    return (await import("./Color/FluxFormatColorValueElement.mjs")).FluxFormatColorValueElement.new(
+    return (await import("./Color/FormatColorValueElement.mjs")).FormatColorValueElement.new(
         color,
         style_sheet_manager
     );
@@ -206,7 +206,7 @@ export async function formatTimeValue(time = null) {
 /**
  * @param {UrlValue} url
  * @param {StyleSheetManager | null} style_sheet_manager
- * @returns {Promise<FluxFormatUrlValueElement | string | null>}
+ * @returns {Promise<FormatUrlValueElement | string | null>}
  */
 export async function formatUrlValue(url = null, style_sheet_manager = null) {
     if (url === null || typeof url !== "object") {
@@ -222,7 +222,7 @@ export async function formatUrlValue(url = null, style_sheet_manager = null) {
         return url.url ?? null;
     }
 
-    return (await import("./Url/FluxFormatUrlValueElement.mjs")).FluxFormatUrlValueElement.new(
+    return (await import("./Url/FormatUrlValueElement.mjs")).FormatUrlValueElement.new(
         url.url,
         url.label ?? null,
         url.title ?? null,
@@ -233,7 +233,7 @@ export async function formatUrlValue(url = null, style_sheet_manager = null) {
 /**
  * @param {EmailValue} email
  * @param {StyleSheetManager | null} style_sheet_manager
- * @returns {Promise<FluxFormatUrlValueElement | string | null>}
+ * @returns {Promise<FormatUrlValueElement | string | null>}
  */
 export async function formatEmailValue(email = null, style_sheet_manager = null) {
     if (email === null || typeof email !== "object") {

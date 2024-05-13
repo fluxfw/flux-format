@@ -1,9 +1,11 @@
 :host {
     align-items: center;
     background-color: var(--format-color-value-background-color);
+    color: var(--format-color-value-foreground-color);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    font-size: var(--format-color-value-font-size);
     gap: var(--format-color-value-gap);
     height: auto;
     max-width: 100%;
@@ -19,8 +21,6 @@
 }
 
 .text {
-    color: var(--format-color-value-foreground-color);
-    font-size: var(--format-color-value-font-size);
     flex-grow: 0;
     flex-shrink: 0;
 }

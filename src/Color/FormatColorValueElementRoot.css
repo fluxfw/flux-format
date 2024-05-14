@@ -2,6 +2,8 @@
     --format-color-value-background-color: #ffffff;
     --format-color-value-color: #000000;
     --format-color-value-font-size: 16px;
+    --format-color-value-font-style: normal;
+    --format-color-value-font-weight: normal;
     --format-color-value-foreground-color: #000000;
     --format-color-value-gap: 5px;
     --format-color-value-size: 20px;

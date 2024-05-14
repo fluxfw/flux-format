@@ -3,6 +3,8 @@
     --format-url-value-active-text-decoration: var(--format-url-value-text-decoration);
     --format-url-value-background-color: #ffffff;
     --format-url-value-font-size: 16px;
+    --format-url-value-font-style: normal;
+    --format-url-value-font-weight: normal;
     --format-url-value-foreground-color: #000000;
     --format-url-value-outline-color: #000000;
     --format-url-value-text-decoration: underline;

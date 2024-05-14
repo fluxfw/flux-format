@@ -3,15 +3,19 @@
     color: var(--format-url-value-foreground-color);
     display: block;
     font-size: var(--format-url-value-font-size);
+    font-style: var(--format-url-value-font-style);
+    font-weight: var(--format-url-value-font-weight);
     height: auto;
     max-width: 100%;
     width: 100%;
 }
 
 a {
-    color: unset;
+    color: var(--format-url-value-foreground-color);
     cursor: default;
-    font-size: unset;
+    font-size: var(--format-url-value-font-size);
+    font-style: var(--format-url-value-font-style);
+    font-weight: var(--format-url-value-font-weight);
     outline: none;
     text-decoration: none;
 }

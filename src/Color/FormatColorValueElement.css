@@ -6,6 +6,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     font-size: var(--format-color-value-font-size);
+    font-style: var(--format-color-value-font-style);
+    font-weight: var(--format-color-value-font-weight);
     gap: var(--format-color-value-gap);
     height: auto;
     max-width: 100%;
@@ -21,6 +23,10 @@
 }
 
 .text {
+    color: var(--format-color-value-foreground-color);
     flex-grow: 0;
     flex-shrink: 0;
+    font-size: var(--format-color-value-font-size);
+    font-style: var(--format-color-value-font-style);
+    font-weight: var(--format-color-value-font-weight);
 }

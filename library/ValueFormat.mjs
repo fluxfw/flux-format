@@ -7,7 +7,7 @@ export class ValueFormat {
     /**
      * @type {Map<string, formatValue>}
      */
-    #format_values;
+    #format_values = new Map();
     /**
      * @type {StyleSheetManager | null}
      */
@@ -41,7 +41,6 @@ export class ValueFormat {
      */
     constructor(style_sheet_manager) {
         this.#style_sheet_manager = style_sheet_manager;
-        this.#format_values = new Map();
     }
 
     /**
